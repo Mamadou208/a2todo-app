@@ -1,12 +1,30 @@
 <h2>Add todo</h2>
-<form (submit)="addTodo()">
-    <input type="text" name="todo-text" [(ngModel)]="text">
-</form>
-<h2>Todo List</h2>
-<ul>
-  <li *ngFor="let todo of todos">
-      {{todo.text}} <button (click)="deleteTodo(todo.text)">x</button>
-  </li>
 
-</ul>
-
+<div class="row">
+    <div class="col-xs-12">
+        <form (submit)="addTodo()">
+            <div class="form-group">
+                <label for="InputTask">Task</label>
+                <input type="text" class="form-control" id="InputTask" name="task" [(ngModel)]="task">
+            </div>
+            <div class="form-group">
+                <label for="InputDeadline">Dead line</label>
+                <input type="datetime-local" class="form-control" placeholder="2016-11-06T16:50:53" id="InputDeadline" name="deadline" [(ngModel)]="deadline">
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let todo of todos">
+                <span class="badge">{{ todo.deadline }}</span>
+                <button class="btn btn-success btn-xs" (click)="deleteTodo(todo)">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </button>
+                &nbsp;
+                {{ todo.task }}
+            </li>
+        </ul>
+    </div>
+</div>

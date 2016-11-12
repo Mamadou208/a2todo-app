@@ -1,31 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import {TodoService} from "../shared/todo.service";
 
+
 @Component({
   selector: 'app-todos',
   templateUrl: './todos.component.html',
   styleUrls: ['./todos.component.css']
 })
 export class TodosComponent implements OnInit {
- todos;
- text ;
+    //addedItems =[]
+    todos= [];
+    task ;
+    deadline;
+    done;
 
-  constructor(private _todoService: TodoService) {
-      this.todos = _todoService;
-  }
+  constructor(private _todoService: TodoService) {}
 
   ngOnInit() {
-      this.todos = this._todoService.getTodoItems()
+      this.todos = this._todoService.getTodoItems();
   }
+
   addTodo(){
-      this.todos.push({text: this.text});
+      this._todoService.addToIem({
+          task: this.task,
+          deadline: this.deadline,
+          done: false
+      })
   };
-  deleteTodo(todoText){
-      for(var i =0; i < this.todos.length; i++){
-        if(this.todos[i].text == todoText){
-            this.todos.splice(i, 1);
-        }
-      }
+  deleteTodo(todoTask){
+      this._todoService.removeFromIem(todoTask)
   }
 
 }
